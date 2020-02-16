@@ -10,7 +10,7 @@ module.exports = eleventyConfig => {
 
   eleventyConfig.addCollection("byYear", collection => {
     const data = {};
-    const all = collection.getAllSorted().reverse();
+    const all = collection.getFilteredByTag("blog").reverse();
     for (const post of all) {
       const year = post.date.getFullYear();
       const yearPosts = data[year] || [];
