@@ -1,0 +1,13 @@
+---
+layout: layouts/default.njk
+---
+
+<main>
+  <header>
+    <h1>{{ title or renderData.title | safe }}</h1>
+  </header>
+  {{ content | safe }}
+  <footer>
+    <p>Date: {{ page.date | date }}</p>
+  </footer>
+</main>

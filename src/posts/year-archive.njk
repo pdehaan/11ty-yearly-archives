@@ -1,0 +1,19 @@
+---
+eleventyExcludeFromCollections: true
+pagination:
+  data: collections.byYear
+  size: 1
+  alias: year
+permalink: "{{ year }}/"
+renderData:
+  title: "{{ year }} Archive"
+---
+
+{%- set posts = collections.byYear[year] -%}
+{% if posts.length %}
+  <ul>
+  {%- for post in posts %}
+    <li><a href="{{ post.url | url }}">{{ post.data.title | safe }}</a> &mdash; {{ post.date | date }}</li>
+  {%- endfor %}
+  </ul>
+{% endif %}
