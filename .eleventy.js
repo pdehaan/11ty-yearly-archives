@@ -9,23 +9,16 @@ module.exports = eleventyConfig => {
   // eleventyConfig.addFilter("inspect", require("util").inspect);
 
   eleventyConfig.addCollection("byYear", collection => {
-    const years = new Map();
-    const all = collection.getAll();
+    const data = {};
+    const all = collection.getAllSorted().reverse();
     for (const post of all) {
       const year = post.date.getFullYear();
-      const yearPosts = years.get(year) || [];
+      const yearPosts = data[year] || [];
       yearPosts.push(post);
-      years.set(year, yearPosts);
-    }
-
-    const data = {};
-    for (const [year, posts] of years.entries()) {
-      // Make sure the posts are sorted by date (in descending order).
-      data[year] = posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+      data[year] = yearPosts;
     }
     return data;
   });
-
 
   return {
     dir: {
